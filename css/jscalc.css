@@ -1,0 +1,185 @@
+ html,
+ body {
+ 	height: 100%;
+ 	width: 100%;
+ 	padding: 0;
+ 	margin: 0;
+ 	position: absolute;
+ 	/*overflow-x: hidden;*/
+ 	font-family: sans-serif;
+}
+::selection{
+	background: rgba(0,0,0,.2);
+}
+#sandbox {
+	background: #ddd;
+	color: #333;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0px;
+	position: absolute;
+}
+#sandbox,
+#sandbox pre.output,
+#sandbox pre.output span,
+#sandbox textarea,
+#sandbox textarea:focus {
+	font-size:16px;
+	line-height:1.3;
+	font-weight: normal;
+	font-family:"Consolas", "Andale Mono", "Courier New", "Courier", monospace;
+	border:0 none;
+	outline:0 none;
+	-webkit-box-shadow:none;
+	   -moz-box-shadow:none;
+	        box-shadow:none;
+}
+#sandbox pre.output {
+	display:block;
+	white-space:pre;
+	position:absolute;
+	bottom: 40px;
+	top: 0px;
+	width: 100%;
+	padding: 10px 0px 0px 0px;
+	margin: 0px;
+	border:0 none;
+	cursor: default !important;
+}
+#sandbox pre.output span { 
+	color:#347c17;
+	margin-left: 10px;
+	}
+#sandbox pre.output span.command {
+	color:#333;
+ }
+#sandbox pre.output span.prefix {
+	color:#333; 
+}
+#sandbox pre.output span.undefined {
+ 	color:#657383; 
+}
+#sandbox pre.output span.string    {
+ 	color:#347c17; 
+}
+#sandbox pre.output span.number    {
+ 	color:#357ec7; 
+}
+#sandbox pre.output span.boolean   {
+ 	color:#008080; 
+}
+#sandbox pre.output span.error     {
+ 	color:#dc381f; 
+}
+
+#sandbox .input {
+	padding:10px 0px 5px 0px;
+	bottom: 0px;
+	width: 100%;
+	position:absolute;
+	background: #555;
+	border-top: 1px #000 solid;
+}
+
+#sandbox textarea {
+	color:#f7f7f7;
+	background:#555;
+	border:0 none;
+	outline:0 none;
+	padding:0;
+	margin:0;
+	resize: none;
+	width:100%;
+	overflow:hidden;
+	text-indent: 10px;
+}
+#sandbox textarea:focus {
+	outline:0 none;
+}
+
+
+#sandbox pre.output::-webkit-scrollbar,
+#sandbox pre.output::-webkit-scrollbar-button,
+#sandbox pre.output::-webkit-scrollbar-track,
+#sandbox pre.output::-webkit-scrollbar-track-piece,
+#sandbox pre.output::-webkit-scrollbar-thumb,
+#sandbox pre.output::-webkit-scrollbar-corner,
+#sandbox pre.output::-webkit-resizer {
+	background: transparent;
+}
+#sandbox pre.output::-webkit-scrollbar {
+	width:  7px;
+	height: 7px;
+	-webkit-border-radius: 4px;
+	        border-radius: 4px;
+}
+#sandbox pre.output::-webkit-scrollbar-track-piece {
+	-webkit-border-radius: 5px;
+	        border-radius: 5px;
+}
+#sandbox pre.output::-webkit-scrollbar-thumb {
+	background: #4f4f4f;
+	        border-radius: 5px;
+}
+#sandbox pre.output::-webkit-scrollbar-button {
+	width:0;
+	height:0;
+}
+.graph {
+	position: absolute;
+	border: 1px #000 solid;
+	z-index: 100;
+	display: none;
+	-webkit-transition: all .5s ease;
+          transition: all .5s ease;
+}
+.cpanel-active {
+	opacity: 1 !important;
+	background: rgba(0,0,0,.1);
+}
+#cpanel {
+	opacity: 0.1;
+	position: absolute;
+	width: 250px;
+	right: 20px;
+	top: 20px;
+	z-index: 101;
+	border-radius: 10px;
+	padding: 10px;
+	cursor: move;
+	-webkit-transition: all .2s ease;
+          transition: all .2s ease;
+}
+#cpanel:hover {
+	opacity: 1;
+	background: rgba(0,0,0,.1);
+}
+#cpanel h3 {
+	margin-top: 0;
+	margin-bottom: 5px;
+	text-align: center;
+}
+#cpanel hr {
+	width: 70%;
+}
+#cpanel button {
+	width: 100%;
+	/*font-variant: small-caps;*/
+	padding: 10px 20px;
+	margin-bottom: 2px;
+	background: #eee;
+	border: 1px #888 solid;
+	border-radius: 5px;
+	-webkit-transition: all .2s ease;
+          transition: all .2s ease;
+}
+#cpanel button:hover {
+	background: #ccc;
+}
+#cpanel button:active {
+	background: #bbb;
+}
+#cpanel button:active, #cpanel button:focus {
+	outline:0 none;
+}

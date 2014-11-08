@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<title>Console Calculator</title>
+	
+	<!-- Stylesheet -->
+	<!-- <link href="css/sandbox.css" rel="stylesheet"/> -->
+	<link href="css/jscalc.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="css/fontawesome.min.css">
+
+</head>
+
+<body>
+
+	<!-- HTML -->
+
+	<iframe src="http://graph.tk/" class="graph" id="_graph"></iframe>
+	<div id="sandbox">Loading console...</div>
+	<div id="readme">
+		<h1>
+			Readme
+		</h1>
+		<p>
+			Readme content
+		</p>
+	</div>
+	<div id="cpanel" class="cpanel-active">
+		<h3>
+			Console Calculator
+		</h3>
+		<button onclick="sandbox.setValue(':help');"><b>Show readme/help</b></button>
+		<hr>
+		<button onclick="sandbox.setValue('5 + (9 / 3)');">Basic math</button>
+		<button onclick="sandbox.setValue('Math.abs(-(Math.sqrt(36)))');">Math functions</button>
+		<button onclick="sandbox.setValue('var myNum = 8 * 7');">Variables</button>
+		<button onclick="sandbox.setValue('var myStr = \'Hello there!\'');">Strings</button>
+		<button onclick="sandbox.setValue('alert(\'I am an alert!\')');">JS functions</button>
+		<button onclick="sandbox.setValue('graph sin(x)');">Graphing</button>
+		<hr>
+		<button onclick="sandbox.setValue(':clear');">Clear all</button>
+		<button onclick="sandbox.setValue('graph clear');">Clear graph</button>
+	</div>
+	<!-- Templates -->
+	
+	<!-- The sandbox template: -->
+	<script type="text/template" id="tplSandbox">
+		<pre class="output"></pre>
+		<div class="input">
+			<textarea rows="1" placeholder="<%= placeholder %>"></textarea>
+		</div>
+	</script>
+
+	<!-- The command/result template (NB whitespace/line breaks matter inside <pre> tag): -->
+	<script type="text/template" id="tplCommand"><% if (! _hidden) { %><span class="command"><%= command %></span>
+<span class="prefix"><%= this.resultPrefix %></span><span class="<%= _class %>"><%= result %></span>
+<% } %></script>
+
+
+	<!-- Scripts -->
+	<script type="text/javascript">
+		
+	</script>
+
+	<!-- Underscore, Backbone, backbone-localStorage, jQuery -->
+	<script src="js/libs/underscore.min.js"></script>
+	<script src="js/libs/backbone.min.js"></script>
+	<script src="js/libs/backbone-localStorage.min.js"></script>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script src="js/jquery.nicescroll.js"></script>
+
+	<!-- The JS Sandbox Console script (requires underscore, backbone and jquery): -->
+	<script src="js/sandbox-console.js"></script>
+	
+	<!-- When ready, create the model and view -->
+	<script type="text/javascript">
+
+		jQuery(document).ready(function($) {
+			// Create the sandbox:
+			window.sandbox = new Sandbox.View({
+				el : $('#sandbox'),
+				model : new Sandbox.Model({
+					iframe : false,  // evaluate commands inside a hidden iframe (default: false)
+					fallback : true // use global eval if iframe isn't available (default: true)
+				}),
+				resultPrefix : " <i class='fa fa-angle-double-right'></i>",
+				helpText : "type javascript commands into the console, hit enter to evaluate. \n\t[up/down] to scroll through history, ':clear' to reset it. \n\t[alt + return/up/down] for returns and multi-line editing.\n\t'graph [formula | show | hide | clear]' for graphing stuff\n\n\tThis was built from https://github.com/openexchangerates/javascript-sandbox-console and graph.tk",
+				tabCharacter : "\t",
+				placeholder : "// Enter a formula"
+			});
+
+			$(".output").niceScroll({ 
+			   	scrollspeed: 80,
+			   	mousescrollstep: 60,
+			   	cursorborder: '0px',
+			   	cursorcolor: "#777",
+			   	touchbehavior: true
+			});
+
+			setTimeout(function(){
+				$('#cpanel').removeClass('cpanel-active');
+			}, 3000);
+
+			$('#cpanel').draggable({
+				start: function() {
+			        $('#cpanel').css({
+						'-webkit-transition': 'none',
+          						'transition': 'none'
+					});
+			    },
+			    stop: function() {
+			        $('#cpanel').css({
+						'-webkit-transition': '0.2s all ease',
+	          					'transition': '0.2s all ease'
+					});
+			    }
+			});
+			
+			//sandbox.model.load('http://code.jquery.com/jquery-2.1.1.min.js');
+			//sandbox.model.iframeEval("var test = 'Hello, world!';");
+			/*
+			-webkit-filter: invert(100%);
+		    filter: invert(100%);
+		    */
+
+		});
+	</script>
+
+</body>
+</html>
